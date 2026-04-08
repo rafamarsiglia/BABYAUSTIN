@@ -1,14 +1,12 @@
 import sgMail from '@sendgrid/mail';
 
 export default async function handler(req, res) {
-  // Solo permitir peticiones POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
   const { name, email, guests } = req.body;
 
-  // 1. Validaciones
   if (!name || !email) {
     return res.status(400).json({ 
       error: `Campo requerido: ${!name ? 'name' : 'email'}` 
@@ -16,8 +14,7 @@ export default async function handler(req, res) {
   }
 
   const guestCount = guests || 1;
-  
-  // 2. Configuración de destinatarios
+
   const recipients = [
     "marketin@orvit.design",
     "cjram188@gmail.com",
@@ -25,7 +22,6 @@ export default async function handler(req, res) {
     "cjg7@nyu.edu"
   ];
 
-  // 3. Configuración de SendGrid
   const apiKey = process.env.SENDGRID_API_KEY;
   const fromEmail = process.env.SENDGRID_FROM_EMAIL;
 
@@ -37,7 +33,6 @@ export default async function handler(req, res) {
   sgMail.setApiKey(apiKey);
 
   const msg = {
-    to: recipients,
     from: fromEmail,
     subject: `RSVP Baby Shower: ${name}`,
     html: `
@@ -54,14 +49,19 @@ export default async function handler(req, res) {
   };
 
   try {
-    console.log(`Intentando enviar RSVP de ${name} a ${recipients.join(', ')}`);
-    await sgMail.sendMultiple(msg); // Usamos sendMultiple para que cada destinatario reciba su propio correo
-    
-    console.log('RSVP enviado con éxito a través de SendGrid');
+    console.log(`Intentando enviar RSVP de ${name}`);
+
+    // Enviar a cada destinatario individualmente
+    for (const recipient of recipients) {
+      await sgMail.send({ ...msg, to: recipient });
+    }
+
+    console.log('RSVP enviado con éxito a todos los destinatarios');
     return res.status(200).json({ message: 'RSVP enviado correctamente' });
+
   } catch (error) {
     console.error('Error al enviar correo con SendGrid:', error);
-    
+
     if (error.response) {
       console.error('Detalles de SendGrid:', error.response.body);
     }
