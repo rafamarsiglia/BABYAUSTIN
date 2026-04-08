@@ -12,10 +12,12 @@ export default function RSVPForm({ lang }: RSVPFormProps) {
   const t = translations[lang];
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
     
     const formData = new FormData(e.target as HTMLFormElement);
     const data = {
@@ -34,17 +36,19 @@ export default function RSVPForm({ lang }: RSVPFormProps) {
       if (response.ok) {
         setSubmitted(true);
       } else {
-        console.error('RSVP failed');
+        const errorData = await response.json();
+        setError(errorData.error || t.rsvpError);
       }
-    } catch (error) {
-      console.error('Error submitting RSVP:', error);
+    } catch (err) {
+      console.error('Error submitting RSVP:', err);
+      setError(t.rsvpError);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section className="py-24 px-4">
+    <section className="py-24 px-4" id="rsvp">
       <div className="max-w-xl mx-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -69,6 +73,16 @@ export default function RSVPForm({ lang }: RSVPFormProps) {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                  {error && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-red-50 border border-red-100 text-red-600 rounded-xl text-sm text-center"
+                    >
+                      {error}
+                    </motion.div>
+                  )}
+
                   <div className="space-y-2">
                     <label className="text-xs uppercase tracking-widest text-gray-400 font-semibold ml-1">
                       {t.rsvpName}
@@ -114,6 +128,9 @@ export default function RSVPForm({ lang }: RSVPFormProps) {
                       >
                         <option value="1">1</option>
                         <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                       </select>
                     </div>
                   </div>

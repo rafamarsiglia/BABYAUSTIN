@@ -53,7 +53,7 @@ async function startServer() {
         res.json({ success: true, message: "RSVP received and emails sent via SendGrid" });
       } catch (error) {
         console.error("Error sending email via SendGrid:", error);
-        res.status(500).json({ success: false, message: "Error sending email" });
+        res.status(500).json({ success: false, error: "Error sending email" });
       }
     } else {
       // Simulation mode if no API key is provided
