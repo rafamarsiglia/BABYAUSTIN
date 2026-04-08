@@ -22,8 +22,9 @@ export default async function handler(req, res) {
     "cjg7@nyu.edu"
   ];
 
-  const apiKey = process.env.SENDGRID_API_KEY;
-  const fromEmail = process.env.SENDGRID_FROM_EMAIL;
+  // 🔹 Sanitizar variables de entorno
+  const apiKey = (process.env.SENDGRID_API_KEY || '').trim();
+  const fromEmail = (process.env.SENDGRID_FROM_EMAIL || '').trim();
 
   if (!apiKey || !fromEmail) {
     console.error('Error: SENDGRID_API_KEY o SENDGRID_FROM_EMAIL no configuradas');
@@ -38,12 +39,9 @@ export default async function handler(req, res) {
     html: `
       <div style="font-family: sans-serif; padding: 20px; color: #333; border: 1px solid #eee; border-radius: 10px;">
         <h2 style="color: #78A387; border-bottom: 2px solid #78A387; padding-bottom: 10px;">Nuevo RSVP Recibido</h2>
-        <p style="font-size: 16px;"><strong>Nombre:</strong> ${name}</p>
-        <p style="font-size: 16px;"><strong>Correo:</strong> ${email}</p>
-        <p style="font-size: 16px;"><strong>Invitados:</strong> ${guestCount}</p>
-        <div style="margin-top: 20px; padding-top: 10px; border-top: 1px solid #eee; font-size: 12px; color: #999;">
-          Este es un mensaje automático del sistema de invitaciones de Austin.
-        </div>
+        <p><strong>Nombre:</strong> ${name}</p>
+        <p><strong>Correo:</strong> ${email}</p>
+        <p><strong>Invitados:</strong> ${guestCount}</p>
       </div>
     `,
   };
@@ -51,7 +49,7 @@ export default async function handler(req, res) {
   try {
     console.log(`Intentando enviar RSVP de ${name}`);
 
-    // Enviar a cada destinatario individualmente
+    // 🔹 Enviar un correo por cada destinatario
     for (const recipient of recipients) {
       await sgMail.send({ ...msg, to: recipient });
     }
@@ -61,11 +59,9 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Error al enviar correo con SendGrid:', error);
-
     if (error.response) {
       console.error('Detalles de SendGrid:', error.response.body);
     }
-
     return res.status(500).json({ 
       error: 'Error al procesar el envío del correo. Por favor intenta más tarde.' 
     });
