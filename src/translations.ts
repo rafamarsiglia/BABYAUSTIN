@@ -1,0 +1,68 @@
+export type Language = 'en' | 'es';
+
+export const translations = {
+  en: {
+    clickToOpen: "Click on the bear",
+    youAreInvited: "You are invited",
+    babyShowerOf: "Baby Shower of",
+    babyName: "Austin Gerakoulis",
+    parents: "Invited by Scarly & Christopher Gerakoulis",
+    date: "Saturday, June 13th, 2026",
+    time: "6:00 p.m. – 10:00 p.m.",
+    location: "Vistamar Restaurant and Lounge",
+    city: "Bronx, New York",
+    dressCode: "Dress Code",
+    dressCodeDesc: "Pastel colors or white",
+    message: "We are waiting for you with love to celebrate the upcoming arrival of our baby Austin.",
+    gallery: "Gallery",
+    rsvp: "RSVP",
+    rsvpName: "Full Name",
+    rsvpEmail: "Email",
+    rsvpGuests: "Number of Guests",
+    rsvpConfirm: "Confirm Attendance",
+    rsvpSuccess: "Thank you! Your confirmation has been sent.",
+    registry: "Gift Registry",
+    registryDesc: "Your presence is our greatest gift, but if you wish to give something, here is our registry.",
+    viewFullRegistry: "View Full Registry",
+    amazonRegistry: "Amazon Baby Registry",
+    giftItems: [
+      "Baby Bottles Set",
+      "Soft Cotton Onesies",
+      "Diaper Bag Organizer",
+      "Baby Bath Tub",
+      "Musical Crib Mobile"
+    ]
+  },
+  es: {
+    clickToOpen: "Haz clic en el osito",
+    youAreInvited: "Estás invitado (a)",
+    babyShowerOf: "Baby Shower de",
+    babyName: "Austin Gerakoulis",
+    parents: "Invitan Scarly & Christopher Gerakoulis",
+    date: "Sábado 13 de junio de 2026",
+    time: "6:00 p.m. – 10:00 p.m.",
+    location: "Vistamar Restaurant and Lounge",
+    city: "Bronx, New York",
+    dressCode: "Código de Vestimenta",
+    dressCodeDesc: "Colores pasteles o blanco",
+    message: "Te esperamos con mucho amor para celebrar la próxima llegada de nuestro bebé Austin.",
+    gallery: "Galería",
+    rsvp: "Confirmar Asistencia",
+    rsvpName: "Nombre Completo",
+    rsvpEmail: "Correo Electrónico",
+    rsvpGuests: "Número de Invitados",
+    rsvpConfirm: "Confirmar Asistencia",
+    rsvpSuccess: "¡Gracias! Tu confirmación ha sido enviada.",
+    registry: "Lista de Regalos",
+    registryDesc: "Tu presencia es nuestro mejor regalo, pero si deseas obsequiarnos algo, aquí tienes nuestra lista.",
+    viewFullRegistry: "Ver Lista Completa",
+    amazonRegistry: "Lista de Regalos de Amazon",
+    giftItems: [
+      "Set de Biberones",
+      "Mamelucos de Algodón",
+      "Organizador de Pañales",
+      "Bañera para Bebé",
+      "Móvil Musical para Cuna"
+    ]
+  }
+};
