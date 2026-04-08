@@ -25,11 +25,12 @@ async function startServer() {
     
     console.log(`New RSVP received: Name: ${name}, Email: ${email}, Guests: ${guests}`);
 
-    // Sanitize environment variables to remove invisible characters (newlines, spaces)
-    const apiKey = (process.env.SENDGRID_API_KEY || "").trim();
-    const fromEmail = (process.env.SENDGRID_FROM_EMAIL || "notifications@orvit.design").trim();
+    // Sanitize environment variables aggressively to remove ANY non-printable characters
+    const apiKey = (process.env.SENDGRID_API_KEY || "").replace(/[^\x20-\x7E]/g, "").trim();
+    const fromEmail = (process.env.SENDGRID_FROM_EMAIL || "notifications@orvit.design").replace(/[^\x20-\x7E]/g, "").trim();
 
     if (apiKey) {
+      console.log(`API Key detected (Length: ${apiKey.length})`);
       sgMail.setApiKey(apiKey);
       const msg = {
         to: recipients,

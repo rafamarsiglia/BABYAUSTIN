@@ -22,15 +22,16 @@ export default async function handler(req, res) {
     "cjg7@nyu.edu"
   ];
 
-  // 🔹 Sanitizar variables de entorno
-  const apiKey = (process.env.SENDGRID_API_KEY || '').trim();
-  const fromEmail = (process.env.SENDGRID_FROM_EMAIL || '').trim();
+  // 🔹 Sanitizar variables de entorno de forma agresiva (elimina caracteres no imprimibles)
+  const apiKey = (process.env.SENDGRID_API_KEY || '').replace(/[^\x20-\x7E]/g, '').trim();
+  const fromEmail = (process.env.SENDGRID_FROM_EMAIL || '').replace(/[^\x20-\x7E]/g, '').trim();
 
   if (!apiKey || !fromEmail) {
     console.error('Error: SENDGRID_API_KEY o SENDGRID_FROM_EMAIL no configuradas');
     return res.status(500).json({ error: 'Error de configuración en el servidor' });
   }
 
+  console.log(`API Key detectada en endpoint (Longitud: ${apiKey.length})`);
   sgMail.setApiKey(apiKey);
 
   const msg = {
