@@ -16,7 +16,12 @@ async function startServer() {
   // API Route for RSVP
   app.post("/api/rsvp", async (req, res) => {
     const { name, email, guests } = req.body;
-    const recipients = ["marketin@orvit.design", "cjram188@gmail.com", "Scarly.vizcaino20@gmail.com"];
+    const recipients = [
+      "marketin@orvit.design", 
+      "cjram188@gmail.com", 
+      "Scarly.vizcaino20@gmail.com",
+      "cjg7@nyu.edu"
+    ];
     
     console.log(`New RSVP received: Name: ${name}, Email: ${email}, Guests: ${guests}`);
 
