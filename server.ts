@@ -25,8 +25,9 @@ async function startServer() {
     
     console.log(`New RSVP received: Name: ${name}, Email: ${email}, Guests: ${guests}`);
 
-    const apiKey = process.env.SENDGRID_API_KEY;
-    const fromEmail = process.env.SENDGRID_FROM_EMAIL || "notifications@orvit.design";
+    // Sanitize environment variables to remove invisible characters (newlines, spaces)
+    const apiKey = (process.env.SENDGRID_API_KEY || "").trim();
+    const fromEmail = (process.env.SENDGRID_FROM_EMAIL || "notifications@orvit.design").trim();
 
     if (apiKey) {
       sgMail.setApiKey(apiKey);
@@ -48,7 +49,7 @@ async function startServer() {
       };
 
       try {
-        await sgMail.send(msg);
+        await sgMail.sendMultiple(msg);
         console.log("Emails sent successfully via SendGrid");
         res.json({ success: true, message: "RSVP received and emails sent via SendGrid" });
       } catch (error) {
