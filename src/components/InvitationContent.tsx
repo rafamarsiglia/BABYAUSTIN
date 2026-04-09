@@ -172,18 +172,53 @@ export default function InvitationContent({ lang }: InvitationContentProps) {
               <Heart className="text-muted-sage w-8 h-8" />
             </div>
             <h3 className="text-xl font-serif mb-2">{t.dressCode}</h3>
-            <p className="text-gray-500 mb-4">{t.dressCodeDesc}</p>
-            <div className="grid grid-cols-5 gap-2 max-w-[180px]">
-              <div className="w-6 h-6 rounded-full bg-white border border-gray-200 shadow-sm" />
-              <div className="w-6 h-6 rounded-full bg-[#E3F2FD] border border-gray-200 shadow-sm" />
-              <div className="w-6 h-6 rounded-full bg-[#F3E5F5] border border-gray-200 shadow-sm" />
-              <div className="w-6 h-6 rounded-full bg-[#F1F8E9] border border-gray-200 shadow-sm" />
-              <div className="w-6 h-6 rounded-full bg-[#FFF9C4] border border-gray-200 shadow-sm" />
-              <div className="w-6 h-6 rounded-full bg-[#FFE0B2] border border-gray-200 shadow-sm" />
-              <div className="w-6 h-6 rounded-full bg-[#F8BBD0] border border-gray-200 shadow-sm" />
-              <div className="w-6 h-6 rounded-full bg-[#DCEDC8] border border-gray-200 shadow-sm" />
-              <div className="w-6 h-6 rounded-full bg-[#B2EBF2] border border-gray-200 shadow-sm" />
-              <div className="w-6 h-6 rounded-full bg-[#D1C4E9] border border-gray-200 shadow-sm" />
+            <p className="text-gray-600 mb-2 leading-relaxed px-4">{t.dressCodeDesc}</p>
+            <p className="text-muted-sage text-sm italic mb-6">{t.dressCodeNote}</p>
+            
+            <div className="flex flex-wrap justify-center gap-4 max-w-xs">
+              {[
+                '#FFFFFF', // White
+                '#E3F2FD', // Light Blue
+               
+                '#F1F8E9', // Light Green
+                '#FFF9C4', // Light Yellow
+          
+              ].map((color, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 + index * 0.1 }}
+                  className="relative group"
+                >
+                  <motion.div
+                    animate={{ 
+                      boxShadow: ["0 0 0px rgba(255,255,255,0)", "0 0 15px rgba(255,255,255,0.8)", "0 0 0px rgba(255,255,255,0)"],
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity, 
+                      delay: index * 0.3 
+                    }}
+                    className="w-10 h-10 rounded-full border-2 border-white shadow-md relative overflow-hidden"
+                    style={{ backgroundColor: color }}
+                  >
+                    <motion.div
+                      animate={{ 
+                        x: ['-100%', '200%'],
+                      }}
+                      transition={{ 
+                        duration: 1.5, 
+                        repeat: Infinity, 
+                        repeatDelay: 2 + index,
+                        ease: "linear"
+                      }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"
+                    />
+                  </motion.div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>

@@ -68,7 +68,8 @@ export default function RSVPForm({ lang }: RSVPFormProps) {
                 exit={{ opacity: 0, y: -20 }}
               >
                 <div className="text-center mb-10">
-                  <h2 className="text-4xl font-serif text-deep-royal-blue mb-4">{t.rsvp}</h2>
+                  <h2 className="text-4xl font-serif text-deep-royal-blue mb-2">{t.rsvp}</h2>
+                  <p className="text-muted-sage font-medium text-sm mb-4">{t.rsvpDeadline}</p>
                   <div className="w-12 h-1 bg-muted-sage mx-auto" />
                 </div>
 

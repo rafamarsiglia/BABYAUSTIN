@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   const guestCount = guests || 1;
 
   const recipients = [
-    "marketin@orvit.design",
+    "marketing@orvit.design",
     "cjram188@gmail.com",
     "Scarly.vizcaino20@gmail.com",
     "cjg7@nyu.edu"
