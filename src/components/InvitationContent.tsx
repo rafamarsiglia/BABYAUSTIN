@@ -141,30 +141,6 @@ export default function InvitationContent({ lang }: InvitationContentProps) {
             </div>
             <h3 className="text-xl font-serif mb-2">{t.location}</h3>
             <p className="text-gray-500 mb-6">{t.city}</p>
-            
-            {/* Embedded Map */}
-            <div className="w-full h-48 rounded-2xl overflow-hidden shadow-lg mb-4 border-4 border-white">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3018.675661208034!2d-73.834789623414!3d40.83509997137537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f37777777777%3A0x7777777777777777!2sVistamar%20Restaurant%20%26%20Lounge!5e0!3m2!1sen!2sus!4v1712512345678!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-
-            <motion.a 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="https://www.google.com/maps/search/?api=1&query=Vistamar+Restaurant+and+Lounge+Bronx+NY" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="px-6 py-2 bg-gradient-to-r from-vibrant-orange to-bright-orange text-white rounded-full text-xs uppercase tracking-widest font-bold shadow-lg hover:shadow-vibrant-orange/30 transition-all"
-            >
-              Ver Mapa
-            </motion.a>
           </motion.div>
 
           <motion.div {...fadeIn} transition={{ delay: 0.4 }} className="flex flex-col items-center">
@@ -172,8 +148,7 @@ export default function InvitationContent({ lang }: InvitationContentProps) {
               <Heart className="text-muted-sage w-8 h-8" />
             </div>
             <h3 className="text-xl font-serif mb-2">{t.dressCode}</h3>
-            <p className="text-gray-600 mb-2 leading-relaxed px-4">{t.dressCodeDesc}</p>
-            <p className="text-muted-sage text-sm italic mb-6">{t.dressCodeNote}</p>
+            <p className="text-gray-600 mb-6 leading-relaxed px-4">{t.dressCodeDesc}</p>
             
             <div className="flex flex-wrap justify-center gap-4 max-w-xs">
               {[
@@ -239,6 +214,34 @@ export default function InvitationContent({ lang }: InvitationContentProps) {
 
       {/* RSVP Section */}
       <RSVPForm lang={lang} />
+
+      {/* Map Section */}
+      <section className="pb-24 px-4 max-w-3xl mx-auto relative z-10 text-center">
+        <motion.div {...fadeIn}>
+          <div className="w-full h-64 md:h-80 rounded-3xl overflow-hidden shadow-2xl mb-8 border-8 border-white">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3018.675661208034!2d-73.834789623414!3d40.83509997137537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f37777777777%3A0x7777777777777777!2sVistamar%20Restaurant%20%26%20Lounge!5e0!3m2!1sen!2sus!4v1712512345678!5m2!1sen!2sus"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+
+          <motion.a 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="https://www.google.com/maps/search/?api=1&query=Vistamar+Restaurant+and+Lounge+Bronx+NY" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-block px-10 py-4 bg-gradient-to-r from-vibrant-orange to-bright-orange text-white rounded-full text-sm uppercase tracking-widest font-bold shadow-xl hover:shadow-vibrant-orange/40 transition-all"
+          >
+            Ver Mapa
+          </motion.a>
+        </motion.div>
+      </section>
 
       {/* Footer */}
       <footer className="py-12 text-center border-t border-light-seafoam/30 relative z-10">
