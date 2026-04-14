@@ -140,6 +140,7 @@ export default function InvitationContent({ lang }: InvitationContentProps) {
               <MapPin className="text-muted-sage w-8 h-8" />
             </div>
             <h3 className="text-xl font-serif mb-2">{t.location}</h3>
+            <p className="text-gray-600 font-medium mb-1">{t.address}</p>
             <p className="text-gray-500 mb-6">{t.city}</p>
           </motion.div>
 
